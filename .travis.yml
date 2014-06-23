@@ -19,7 +19,11 @@ env:
   #- ROOT=5-34-06
   #- ROOT=5-34-07
   - ROOT=5-34-08
-  #- ROOT=5-99-02
+  - ROOT=6-02-04
 install: source ci/install.sh
 script: bash ci/test.sh
-cache: apt
+cache: 
+	apt
+	directories: # also works for files ;)
+  		- root_v5-34-25_python_2.7.tar.gz
+  		- root_v6-02-04_python_2.7.tar.gz
