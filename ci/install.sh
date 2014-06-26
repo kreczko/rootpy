@@ -11,13 +11,26 @@ if [[ $TRAVIS_PYTHON_VERSION == '3.2' ]]; then
     export PYTHON_SUFFIX="3"
 fi
 
+# add repositories for gcc 4.8 and clang 3.5
+sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test
+sudo add-apt-repository --yes 'deb http://llvm.org/apt/precise/ llvm-toolchain-precise main'
+wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key | sudo apt-key add -
 sudo apt-get update -qq
 sudo apt-get install -qq python${PYTHON_SUFFIX}-pip python${PYTHON_SUFFIX}-numpy python${PYTHON_SUFFIX}-sphinx python${PYTHON_SUFFIX}-nose
+sudo apt-get install -qq clang-3.5 libclang-3.5-dev gcc-4.8 g++-4.8
 
 # matplotlib and PyTables are not available for Python 3 as packages from the main repo yet.
 if [[ $TRAVIS_PYTHON_VERSION == '2.7' ]]; then
     time sudo apt-get install -qq python${PYTHON_SUFFIX}-matplotlib python${PYTHON_SUFFIX}-tables
 fi
+
+if [[ $ROOT == 6* ]]; then
+  sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 50;
+  sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 50;
+  sudo update-alternatives --set gcc /usr/bin/gcc-4.8;
+  sudo update-alternatives --set g++ /usr/bin/g++-4.8;
+fi
+
 
 pip install uncertainties
 
