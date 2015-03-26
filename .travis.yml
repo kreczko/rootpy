@@ -23,7 +23,7 @@ env:
 install: source ci/install.sh
 script: bash ci/test.sh
 cache: 
-	apt
-	directories: # also works for files ;)
-  		- root_v5-34-25_python_2.7.tar.gz
-  		- root_v6-02-04_python_2.7.tar.gz
+  - apt
+  - directories: # also works for files ;)
+    - root_v5-34-25_python_2.7.tar.gz
+    - root_v6-02-04_python_2.7.tar.gz
