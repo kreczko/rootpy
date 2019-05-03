@@ -41,10 +41,10 @@ class UserData(object):
 class BaseTree(NamedObject):
 
     DRAW_PATTERN = re.compile(
-        '^(?P<branches>.+?)'
-        '(?P<redirect>\>\>[\+]?'
-        '(?P<name>[^\(]+)'
-        '(?P<binning>.+)?)?$')
+        r'^(?P<branches>.+?)'
+        r'(?P<redirect>>>[\+]?'
+        r'(?P<name>[^(]+)'
+        r'(?P<binning>.+)?)?$')
 
     def _post_init(self):
         """
